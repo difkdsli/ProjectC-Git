@@ -1,0 +1,184 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "NativeGameplayTags.h"
+
+namespace ProjectCGameplayTags
+{
+	// SetSetByCallerMagnitude에 무기 데미지 설정 태그
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Data_Damage)
+
+		// Input Tag
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Test)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Move)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Look)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_SwitchTarget)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Dodge)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_UsePotion)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_NextPotion)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_SwitchWeapon)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_SwitchMagic)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_AshesOfWar)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Magic)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_LightAttack)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_HeavtAttack)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Parry)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_InterAction)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Jump)
+
+
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Toggle)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Toggle_TargetLockOn)
+
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Hold)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Hold_Guard)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Hold_Sprint)
+
+		// Player Tag
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Melee_SwordAttack)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Melee_HeavyAttack)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Melee_GuardCounter)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Melee_AshesOfWar_TripleThrust)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Melee_AshesOfWar_ShieldRush)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Melee_AshesOfWar_Parry)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Magic_MagicBolt)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Magic_FireArrow)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Magic_Starfall)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_TargetLockOn)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Dodge)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Execution)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_SwitchWeapon)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_SwitchMagic)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_UsePotion)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_NextPotion)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_ParrySuccess)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_OpenGraceMenu)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_OpenMessage)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Sprint)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Portal)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Jump)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_EnterBossRoom)
+
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Status_TargetLock)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Status_Parrying)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Status_AshesOfWar_ShieldRush)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Status_HeavyAttack)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Status_NearGrace)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Status_NearBossGate)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Status_NearPortal)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Status_NearMessage)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Status_OpenMessage)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Status_AtGrace)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Status_Sprint)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Status_GuardCounterAvailable)
+
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Equip_Sword)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Equip_Staff)
+
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Equip_Magic_MagicBolt)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Equip_Magic_FireArrow)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Equip_Magic_Starfall)
+
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Event_TargetSwitch)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Event_ParrySuccess)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Event_SpellCast)
+
+		// Enemy Tag
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Ability_Melee_SwordAttack)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Ability_Magic_MagicBolt)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Ability_Magic_WaterBall)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Ability_Executed)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Ability_EnterExecutedState)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Ability_Chasing)
+
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Status_ExecutionAvailable)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Status_Executed)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Status_Chasing)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Status_Evade_SpellReactive)
+
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Event_ExecutionAvailable)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Event_Executed)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Event_Chasing)
+
+		// Boss Tag
+		// Aurora
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Boss_Aurora_Ability_Evade)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Boss_Aurora_Ability_Evade_SpellReactive)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Boss_Aurora_Ability_RushCombo)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Boss_Aurora_Ability_QuadSlash)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Boss_Aurora_Ability_ForwardTripleSlash)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Boss_Aurora_Ability_JumpComboSlash)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Boss_Aurora_Ability_SlashThrustDoubleSlash)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Boss_Aurora_Ability_WideSlash)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Boss_Aurora_Ability_ArrowStorm)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Boss_Aurora_Ability_PhantomRush)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Boss_Aurora_Ability_Frost)
+	
+		// Grux
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Boss_Grux_Ability_FourStrike)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Boss_Grux_Ability_Rush)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Boss_Grux_Ability_Rush2)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Boss_Grux_Ability_Roar)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Boss_Grux_Ability_TripleRush)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Boss_Grux_Ability_UpperRush)
+		
+		// Shared Tag
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Ability_HitReact)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Ability_GuardBreak)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Ability_Block)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Ability_Death)
+
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_Block)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_BlockSuccess)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_Invincible)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_DamageTaken)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_MagicDamageTaken)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_Death)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_SuperArmor)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_KnockdownOnHit)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_InAction)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_HitReact)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_InAir)
+	
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Layer_UpperBody)
+		
+
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Event_DamageTaken)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Event_GuardBreak)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Event_MagicDamageTaken)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Event_HitReact_Front)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Event_HitReact_Back)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Event_HitReact_Right)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Event_HitReact_Left)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Event_HitReact_Block)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Event_HitReact_Knockdown_Front)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Event_HitReact_Knockdown_Back)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Event_Death)
+
+		// Item Tag
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Item_Potion_Health)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Item_Potion_Mana)
+
+		// Gameplay Cue Tag
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_Blood)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_BloodExplosion)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_Block)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_BlockBreak)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_CameraShake)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_MagicCast)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_SkeletonMage_MagicCast)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_EnterExecute)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_StartFinishExecuted)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_EndFinishExecuted)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_MagicArrowHit)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_FireArrowHit)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_MagicBoltHit)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_WaterBallHit)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_StarfallHit)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_Kill)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_Heal_Health)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_Heal_Mana)
+
+}
