@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameplayEffectExecutionCalculation.h"
 #include "ProjectC_GEEC.generated.h"
-//
+
 /**
  *
  */
