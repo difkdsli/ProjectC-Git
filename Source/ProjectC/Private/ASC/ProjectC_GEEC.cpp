@@ -69,7 +69,7 @@ void UProjectC_GEEC::Execute_Implementation(const FGameplayEffectCustomExecution
 	FAggregatorEvaluateParameters EvaluateParams;
 	EvaluateParams.SourceTags = Spec.CapturedSourceTags.GetAggregatedTags();
 	EvaluateParams.TargetTags = Spec.CapturedTargetTags.GetAggregatedTags();
-
+//
 	// Ä¸Ã³µÈ °ª ²¨³»±â
 	float AttackPower = 0.f;
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(GetProjectCDamageCapture().AttackPowerDef, EvaluateParams, AttackPower);
