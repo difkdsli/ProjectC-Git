@@ -45,7 +45,7 @@ void UTargetLockOnAbility::SetCurrentLockOnTarget(FVector PlayerLocation)
 		float CurrentTargetHealth = CurrentLockOnTarget->ProjectCAbilitySystemComponent->GetGameplayAttributeValue(UProjectCAttributeSet::GetCurrentHealthAttribute(), bFound);
 
 		if (bFound && CurrentTargetHealth <= 0.f)
-		{	
+		{
 			DrawTargetLockOnWidget(false);
 			AvailableTargets.Remove(CurrentLockOnTarget);
 			CurrentLockOnTarget = nullptr;
@@ -61,9 +61,8 @@ void UTargetLockOnAbility::SetCurrentLockOnTarget(FVector PlayerLocation)
 		{
 			CurrentLockOnTarget->bHealthBarTimeOut = false;
 			PlayerOrientRotationToMovement(false);
-
 		}
-	}// 마지막 적 죽으면 어빌리티 종료
+	} // 마지막 적 죽으면 어빌리티 종료
 	else if (CurrentLockOnTarget == nullptr && AvailableTargets.Num() == 0)
 	{
 		CancelAbility(GetCurrentAbilitySpecHandle(), GetCurrentActorInfo(), GetCurrentActivationInfo(), true);
@@ -98,7 +97,6 @@ void UTargetLockOnAbility::SwitchLockOnTarget()
 
 void UTargetLockOnAbility::LockOnTraceLogic(float DeltaTime)
 {
-
 	TimeSinceLastTrace += DeltaTime;
 
 	// 특정 시간마다 주변적을 찾음
@@ -136,7 +134,9 @@ void UTargetLockOnAbility::LockOnTraceLogic(float DeltaTime)
 
 		PlayerController->SetControlRotation(FRotator(CurrentRotation.Pitch, NewRotation.Yaw, CurrentRotation.Roll));
 	}
-	GetPlayerCharacterFromActorInfo()->CurrentTarget = CurrentLockOnTarget;
+
+	if (GetPlayerCharacterFromActorInfo()->CurrentTarget)
+		GetPlayerCharacterFromActorInfo()->CurrentTarget = CurrentLockOnTarget;
 }
 
 // 주변 적 찾는 트레이스 함수
