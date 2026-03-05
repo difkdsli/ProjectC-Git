@@ -101,13 +101,13 @@ void APlayerProjectile::LaunchToTarget()
 
 void APlayerProjectile::ApplyDamageToHitActors(AActor* InHitActor,float InDamage)
 {
-	// �ڱ� �ڽŰ� �浹�ϴ� ���� �����ϴ� �ڵ�
+	// 자기 자신과 충돌하는 것을 방지하는 코드
 	if (InHitActor == GetOwner())
 	{
 		return;
 	}
 
-	// ������ ����
+	// 데미지 전달
 	if (AProjectPlayerCharacter* SourceActor = Cast<AProjectPlayerCharacter>(GetOwner()))
 	{
 
@@ -115,17 +115,17 @@ void APlayerProjectile::ApplyDamageToHitActors(AActor* InHitActor,float InDamage
 		{
 			UProjectCAbilitySystemComponent* HitActorASC = HitActor->ProjectCAbilitySystemComponent;
 
-			// ��ü �� ����
+			// 시체 딜 방지
 			if (HitActorASC->bHealthCheck())
 			{
 				return;
 			}
 
-			// ���� ������ ���� �±� ����
+			// 마법 데미지 받음 태그 전달
 			HitActorASC->AddLooseGameplayTag(ProjectCGameplayTags::Shared_Status_MagicDamageTaken);
 			UProjectCAbilitySystemComponent* SourceActorASC = SourceActor->ProjectCAbilitySystemComponent;
 
-			// ������ �����ϱ� ���� ���ؽ�Ʈ, ���� ����
+			// 데미지 전달하기 위한 컨텍스트, 스펙 생성
 			FGameplayEffectContextHandle EffectContext = SourceActorASC->MakeEffectContext();
 			EffectContext.AddSourceObject(this);
 
@@ -138,24 +138,25 @@ void APlayerProjectile::ApplyDamageToHitActors(AActor* InHitActor,float InDamage
 
 			if (HitActorASC->HasMatchingGameplayTag(ProjectCGameplayTags::Shared_Status_Invincible))return;
 
-			// �ǰ� ���� ���
-			FVector HitActorToSourceActor = (SourceActor->GetActorLocation() - HitActor->GetActorLocation()).GetSafeNormal(); // �����ڿ��� �����ڷ� ���� ���� ����
-			FVector HitActorForward = HitActor->GetActorForwardVector(); // �������� ���� ����
+			// 피격 방향 계산
+			FVector HitActorToSourceActor = (SourceActor->GetActorLocation() - HitActor->GetActorLocation()).GetSafeNormal(); // 피해자에서 공격자로 가는 방향 벡터
+			FVector HitActorForward = HitActor->GetActorForwardVector();  // 피해자의 전방 벡터
 
-			float DotResult = FVector::DotProduct(HitActorForward, HitActorToSourceActor); // �������� ���溤�Ͱ� �����ڷ� ���ϴ� ���溤�Ϳ� �󸶳� ��ġ�ϴ���. 1�� ���� -1�� �ĸ� 0�� �¿� �� �� �ϳ�
+			float DotResult = FVector::DotProduct(HitActorForward, HitActorToSourceActor); // 피해자의 전방벡터가 공격자로 향하는 전방벡터와 얼마나 일치하는지. 1은 정면 -1은 후면 0은 좌우 둘 중 하나
 
-			float Direction = FVector::CrossProduct(HitActorForward, HitActorToSourceActor).Z; // �������� ���溤�Ϳ� �����ڷ� ���ϴ� ���� ���͸� �����Ͽ� ���� ������ ������ ���� �Ǵ�
+
+			float Direction = FVector::CrossProduct(HitActorForward, HitActorToSourceActor).Z; // 피해자의 전방벡터와 공격자로 향하는 방향 벡터를 외적하여 나온 값으로 오른쪽 왼쪽 판단
 
 			FGameplayTag HitReactTag;
 			FGameplayEventData Payload;
 			Payload.Instigator = SourceActor;
 			Payload.Target = HitActor;
 
-			if (DotResult > 0.5f) // ������ ����
+			if (DotResult > 0.5f) // 피해자 정면
 			{
 
-				// ��� ���� ���
-				// ���¹̳� 1 �̻��̸� ��� ����
+				// 방어 중일 경우
+				// 스태미너 1 이상이면 방어 성공
 				if (HitActor->ProjectCAttributeSet->GetCurrentStamina() > 0.f && HitActorASC->HasMatchingGameplayTag(ProjectCGameplayTags::Shared_Status_Block))
 				{
 
@@ -165,7 +166,7 @@ void APlayerProjectile::ApplyDamageToHitActors(AActor* InHitActor,float InDamage
 					HitActorASC->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
 				
 
-					// ��� ȿ�� �����÷��� ť ����
+					// 방어 효과 게임플레이 큐 실행
 					FGameplayCueParameters Parameters;
 					Parameters.Location = HitActor->GetActorLocation();
 					HitActorASC->ExecuteGameplayCue(ProjectCGameplayTags::GameplayCue_VFX_Block, Parameters);
@@ -182,7 +183,7 @@ void APlayerProjectile::ApplyDamageToHitActors(AActor* InHitActor,float InDamage
 
 				}
 			}
-			else if (DotResult < -0.5f) // ������ �ĸ�
+			else if (DotResult < -0.5f) // 피해자 후면
 			{
 				HitReactTag = ProjectCGameplayTags::Shared_Event_HitReact_Back;
 				//Debug::Print("Back");
@@ -190,7 +191,7 @@ void APlayerProjectile::ApplyDamageToHitActors(AActor* InHitActor,float InDamage
 					UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(HitActor, HitReactTag, Payload);
 				HitActorASC->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
 			}
-			else if (Direction > 0.f) // ����
+			else if (Direction > 0.f) // 우측
 			{
 				HitReactTag = ProjectCGameplayTags::Shared_Event_HitReact_Right;
 				//Debug::Print("Right");
@@ -198,7 +199,7 @@ void APlayerProjectile::ApplyDamageToHitActors(AActor* InHitActor,float InDamage
 					UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(HitActor, HitReactTag, Payload);
 				HitActorASC->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
 			}
-			else // ����
+			else // 좌측
 			{
 				HitReactTag = ProjectCGameplayTags::Shared_Event_HitReact_Left;
 				//Debug::Print("Left");
@@ -208,7 +209,7 @@ void APlayerProjectile::ApplyDamageToHitActors(AActor* InHitActor,float InDamage
 			}
 
 
-			// �� AI �������忡�� Ÿ�� ���� ����
+			// 적 AI 블랙보드에서 타겟 액터 설정
 			if (AProjectEnemyCharacter* EnemyActor = Cast<AProjectEnemyCharacter>(HitActor))
 			{
 				if (AProjectPlayerCharacter* PlayerOwner = Cast<AProjectPlayerCharacter>(GetOwner()))
@@ -217,7 +218,7 @@ void APlayerProjectile::ApplyDamageToHitActors(AActor* InHitActor,float InDamage
 				}
 			}
 
-			// �����÷��� ť ����
+			// 게임플레이 큐 실행
 			FGameplayCueParameters Parameters;
 			Parameters.Location = HitActor->GetActorLocation();
 			HitActorASC->ExecuteGameplayCue(ProjectCGameplayTags::GameplayCue_VFX_Blood, Parameters);
@@ -232,14 +233,14 @@ void APlayerProjectile::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedC
 {
 	Super::OnComponentBeginOverlap(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex, bFromSweep, SweepResult);
 
-	// �ڱ� �ڽŰ� �浹�ϴ� ���� �����ϴ� �ڵ�
+	// 자기 자신과 충돌하는 것을 방지
 	if (OtherActor == GetOwner())
 	{
 		return;
 	}
 
 
-	// ������ ����
+	// 데미지 전달
 	if (AProjectPlayerCharacter* SourceActor = Cast<AProjectPlayerCharacter>(GetOwner()))
 	{
 
@@ -252,11 +253,11 @@ void APlayerProjectile::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedC
 				return;
 			}
 
-			// ���� ������ ���� �±� ����
+			// 마법 데미지 받음 태그 전달
 			HitActorASC->AddLooseGameplayTag(ProjectCGameplayTags::Shared_Status_MagicDamageTaken);
 			UProjectCAbilitySystemComponent* SourceActorASC = SourceActor->ProjectCAbilitySystemComponent;
 
-			// ������ �����ϱ� ���� ���ؽ�Ʈ, ���� ����
+			// 데미지 전달하기 위한 컨텍스트, 스펙 생성
 			FGameplayEffectContextHandle EffectContext = SourceActorASC->MakeEffectContext();
 			EffectContext.AddSourceObject(this);
 
@@ -269,24 +270,25 @@ void APlayerProjectile::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedC
 
 			if (HitActorASC->HasMatchingGameplayTag(ProjectCGameplayTags::Shared_Status_Invincible))return;
 
-			// �ǰ� ���� ���
-			FVector HitActorToSourceActor = (SourceActor->GetActorLocation() - HitActor->GetActorLocation()).GetSafeNormal(); // �����ڿ��� �����ڷ� ���� ���� ����
-			FVector HitActorForward = HitActor->GetActorForwardVector(); // �������� ���� ����
+			// 피격 방향 계산
+			FVector HitActorToSourceActor = (SourceActor->GetActorLocation() - HitActor->GetActorLocation()).GetSafeNormal(); // 피해자에서 공격자로 가는 방향 벡터
 
-			float DotResult = FVector::DotProduct(HitActorForward, HitActorToSourceActor); // �������� ���溤�Ͱ� �����ڷ� ���ϴ� ���溤�Ϳ� �󸶳� ��ġ�ϴ���. 1�� ���� -1�� �ĸ� 0�� �¿� �� �� �ϳ�
+			FVector HitActorForward = HitActor->GetActorForwardVector(); // 피해자의 전방 벡터
 
-			float Direction = FVector::CrossProduct(HitActorForward, HitActorToSourceActor).Z; // �������� ���溤�Ϳ� �����ڷ� ���ϴ� ���� ���͸� �����Ͽ� ���� ������ ������ ���� �Ǵ�
+			float DotResult = FVector::DotProduct(HitActorForward, HitActorToSourceActor); // 피해자의 전방벡터가 공격자로 향하는 전방벡터와 얼마나 일치하는지. 1은 정면 -1은 후면 0은 좌우 둘 중 하나
+
+			float Direction = FVector::CrossProduct(HitActorForward, HitActorToSourceActor).Z; // 피해자의 전방벡터와 공격자로 향하는 방향 벡터를 외적하여 나온 값으로 오른쪽 왼쪽 판단
 
 			FGameplayTag HitReactTag;
 			FGameplayEventData Payload;
 			Payload.Instigator = SourceActor;
 			Payload.Target = HitActor;
 
-			if (DotResult > 0.5f) // ������ ����
+			if (DotResult > 0.5f) // 피해자 정면
 			{
 
-				// ��� ���� ���
-				// ���¹̳� 1 �̻��̸� ��� ����
+				// 방어 중일 경우
+				// 스태미너 1 이상이면 방어 성공
 				if (HitActor->ProjectCAttributeSet->GetCurrentStamina() > 0.f && HitActorASC->HasMatchingGameplayTag(ProjectCGameplayTags::Shared_Status_Block))
 				{
 
@@ -296,7 +298,7 @@ void APlayerProjectile::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedC
 					HitActorASC->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
 					Destroy();
 
-					// ��� ȿ�� �����÷��� ť ����
+					// 방어 효과 게임플레이 큐 실행
 					FGameplayCueParameters Parameters;
 					Parameters.Location = HitActor->GetActorLocation();
 					HitActorASC->ExecuteGameplayCue(ProjectCGameplayTags::GameplayCue_VFX_Block, Parameters);
@@ -313,7 +315,7 @@ void APlayerProjectile::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedC
 
 				}
 			}
-			else if (DotResult < -0.5f) // ������ �ĸ�
+			else if (DotResult < -0.5f) // 피해자 후면
 			{
 				HitReactTag = ProjectCGameplayTags::Shared_Event_HitReact_Back;
 				//Debug::Print("Back");
@@ -321,7 +323,7 @@ void APlayerProjectile::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedC
 				UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(HitActor, HitReactTag, Payload);
 				HitActorASC->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
 			}
-			else if (Direction > 0.f) // ����
+			else if (Direction > 0.f) // 우측
 			{
 				HitReactTag = ProjectCGameplayTags::Shared_Event_HitReact_Right;
 				//Debug::Print("Right");
@@ -329,7 +331,7 @@ void APlayerProjectile::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedC
 				UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(HitActor, HitReactTag, Payload);
 				HitActorASC->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
 			}
-			else // ����
+			else // 좌측
 			{
 				HitReactTag = ProjectCGameplayTags::Shared_Event_HitReact_Left;
 				//Debug::Print("Left");
@@ -339,7 +341,7 @@ void APlayerProjectile::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedC
 			}
 
 
-			// �� AI �������忡�� Ÿ�� ���� ����
+			// 적 AI 블랙보드에서 타겟 액터 설정
 			if (AProjectEnemyCharacter* EnemyActor = Cast<AProjectEnemyCharacter>(HitActor))
 			{
 				if (AProjectPlayerCharacter* PlayerOwner = Cast<AProjectPlayerCharacter>(GetOwner()))
@@ -348,12 +350,12 @@ void APlayerProjectile::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedC
 				}
 			}
 
-			// �����÷��� ť ����
+			// 게임플레이 큐 실행
 			FGameplayCueParameters Parameters;
 			Parameters.Location = HitActor->GetActorLocation();
 			HitActorASC->ExecuteGameplayCue(ProjectCGameplayTags::GameplayCue_VFX_Blood, Parameters);
 			
-			// ��ƼŬ �����ϰ� ���� �ı�
+			// 파티클 실행하고 액터 파괴
 			if (Cast<AProjectEnemyCharacter>(HitActor))
 				Destroy();
 		}
