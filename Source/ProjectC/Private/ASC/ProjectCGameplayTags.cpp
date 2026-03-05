@@ -43,6 +43,7 @@ namespace ProjectCGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Magic_MagicBolt, "Player.Ability.Magic.MagicBolt")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Magic_FireArrow, "Player.Ability.Magic.FireArrow")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Magic_Starfall, "Player.Ability.Magic.Starfall")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Magic_RockSling, "Player.Ability.Magic.RockSling")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_TargetLockOn, "Player.Ability.TargetLockOn")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Dodge, "Player.Ability.Dodge")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Execution, "Player.Ability.Execution")
@@ -77,6 +78,7 @@ namespace ProjectCGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Player_Equip_Magic_MagicBolt, "Player.Equip.Magic.MagicBolt")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Equip_Magic_FireArrow, "Player.Equip.Magic.FireArrow")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Equip_Magic_Starfall, "Player.Equip.Magic.Starfall")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Equip_Magic_RockSling, "Player.Equip.Magic.RockSling")
 
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_TargetSwitch, "Player.Event.TargetSwitch")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_ParrySuccess, "Player.Event.ParrySuccess")
@@ -173,6 +175,7 @@ namespace ProjectCGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(GameplayCue_VFX_FireArrowHit, "GameplayCue.VFX.FireArrowHit")
 	UE_DEFINE_GAMEPLAY_TAG(GameplayCue_VFX_MagicBoltHit, "GameplayCue.VFX.MagicBoltHit")
 	UE_DEFINE_GAMEPLAY_TAG(GameplayCue_VFX_WaterBallHit, "GameplayCue.VFX.WaterBallHit")
+	UE_DEFINE_GAMEPLAY_TAG(GameplayCue_VFX_RockSlingHit, "GameplayCue.VFX.RockSlingHit")
 	UE_DEFINE_GAMEPLAY_TAG(GameplayCue_VFX_StarfallHit, "GameplayCue.VFX.StarfallHit")
 	UE_DEFINE_GAMEPLAY_TAG(GameplayCue_VFX_Kill, "GameplayCue.VFX.Kill")
 	UE_DEFINE_GAMEPLAY_TAG(GameplayCue_VFX_Heal_Health, "GameplayCue.VFX.Heal.Health")

@@ -46,6 +46,7 @@ namespace ProjectCGameplayTags
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Magic_MagicBolt)
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Magic_FireArrow)
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Magic_Starfall)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Magic_RockSling)
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_TargetLockOn)
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Dodge)
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Execution)
@@ -80,6 +81,7 @@ namespace ProjectCGameplayTags
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Equip_Magic_MagicBolt)
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Equip_Magic_FireArrow)
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Equip_Magic_Starfall)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Equip_Magic_RockSling)
 
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Event_TargetSwitch)
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Event_ParrySuccess)
@@ -176,6 +178,7 @@ namespace ProjectCGameplayTags
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_FireArrowHit)
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_MagicBoltHit)
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_WaterBallHit)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_RockSlingHit)
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_StarfallHit)
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_Kill)
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_VFX_Heal_Health)

@@ -43,9 +43,10 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	// Native Bind 함수들
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
-	void SwitchTarget();
+	void SwitchTarget(); 
 
 	void AbilityInputPressed(FGameplayTag InInputTag);
 	void AbilityInputReleased(FGameplayTag InInputTag);
