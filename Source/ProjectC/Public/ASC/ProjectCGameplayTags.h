@@ -125,6 +125,7 @@ namespace ProjectCGameplayTags
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Boss_Grux_Ability_Roar)
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Boss_Grux_Ability_TripleRush)
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Boss_Grux_Ability_UpperRush)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Boss_Grux_Ability_Brust)
 		
 		// Shared Tag
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Ability_HitReact)

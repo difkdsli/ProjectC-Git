@@ -123,6 +123,7 @@ namespace ProjectCGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Boss_Grux_Ability_Roar, "Boss.Grux.Ability.Roar")
 	UE_DEFINE_GAMEPLAY_TAG(Boss_Grux_Ability_TripleRush, "Boss.Grux.Ability.TripleRush")
 	UE_DEFINE_GAMEPLAY_TAG(Boss_Grux_Ability_UpperRush, "Boss.Grux.Ability.UpperRush")
+	UE_DEFINE_GAMEPLAY_TAG(Boss_Grux_Ability_Brust, "Boss.Grux.Ability.Brust")
 
 	// Shared Tag
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Ability_HitReact, "Shared.Ability.HitReact")
